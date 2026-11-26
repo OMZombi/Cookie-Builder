@@ -1,7 +1,1 @@
-opencv-python>=4.8
-numpy>=1.24
-Pillow>=10.0
-shapely>=2.0
-trimesh>=4.0
-scipy>=1.11
-matplotlib>=3.7
+Tkinter is provided by most standard Python desktop installations.

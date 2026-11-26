@@ -15,6 +15,7 @@ Cookie-Builder converts an image into a printable cookie-cutter STL. It separate
   - base thickness
 - Export binary STL
 - Inspect a 2D preview of the detected silhouette and emboss lines
+- Use the basic desktop GUI
 
 ## Installation
 
@@ -22,34 +23,29 @@ Requires Python 3.10+
 
 ```bash
 python -m venv .venv
-```
-
-Activate the environment:
-
-```bash
-# macOS/Linux
-source .venv/bin/activate
-
-# Windows
-.venv\Scripts\activate
-```
-
-Install dependencies:
-
-```bash
+source .venv/bin/activate  # macOS/Linux
+# .venv\Scripts\activate  # Windows
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
 ## Usage
 
-Generate an STL:
+### Desktop GUI
+
+```bash
+python src/cookie_builder_gui.py
+```
+
+Select an input image, adjust the parameters, optionally create a preview, and click **Generate STL**.
+
+### Command line
 
 ```bash
 python src/cookie_builder.py input.png output.stl --size-mm 80
 ```
 
-For an image with transparent background:
+For an image with a transparent background:
 
 ```bash
 python src/cookie_builder.py input.png output.stl --size-mm 80 --threshold 128 --wall-mm 1.2 --emboss-mm 1.0
@@ -74,23 +70,16 @@ Useful options:
 
 The generated model consists of:
 
-1. A rectangular or silhouette base plate
+1. A silhouette base plate
 2. A full-height outer cutting wall
 3. Lower-height embossing line meshes inside the silhouette
 
-The default emboss height is deliberately lower than the cutter wall height. A line-oriented image should have high contrast: black lines on white or transparent areas work best.
+The default emboss height is deliberately lower than the cutter wall height. Line-art images should have high contrast: black lines on white or transparent areas work best.
 
 ## Development
 
-Run a syntax check:
-
 ```bash
 python -m compileall src tests
-```
-
-Run tests:
-
-```bash
 python -m unittest discover -s tests -v
 ```
 
